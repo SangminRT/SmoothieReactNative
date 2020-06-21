@@ -33,28 +33,49 @@ const ButtonContainer = Styled.View`
  `;
 
 interface Props {
-  title?: string;
-  initValue: number;
+    title?: string;
+    initValue: number;
 }
 
-const Counter = ({title, initValue}: Props) => {
-  const [count, setCount] = useState<number>(0);
+interface State {
+    count: number;
+}
 
-  return (
-    <Container>
-      {title && (
-        <TitileContainer>
-          <TitleLabel>{title}</TitleLabel>
-        </TitileContainer>
-      )}
-      <CountContainer>
-        <CountLabel>{initValue + count}</CountLabel>
-      </CountContainer>
-      <ButtonContainer>
-        <Button iconName="plus" onPress={() => setCount(count + 1)} />
-        <Button iconName="minus" onPress={() => setCount(count - 1)} />
-      </ButtonContainer>
-    </Container>
-  );
-};
+class Counter extends React.Component<Props, State> {
+    constructor(props: Props) {
+        super(props);
+        console.log('constructor');
+
+        this.state = {
+            count: props.initValue,
+        };
+    }
+
+    render() {
+        const {title} = this.props;
+        const {count} = this.state;
+        return (
+            <Container>
+                {title && (
+                    <TitileContainer>
+                        <TitleLabel>{title}</TitleLabel>
+                    </TitileContainer>
+                )}
+                <CountContainer>
+                    <CountLabel>{count}</CountLabel>
+                </CountContainer>
+                <ButtonContainer>
+                    <Button
+                        iconName="plus"
+                        onPress={() => this.setState({count: count + 1})}
+                    />
+                    <Button
+                        iconName="minus"
+                        onPress={() => this.setState({count: count - 1})}
+                    />
+                </ButtonContainer>
+            </Container>
+        );
+    }
+}
 export default Counter;

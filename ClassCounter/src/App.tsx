@@ -18,7 +18,7 @@ const Container = Styled.View`
 const App = () => {
   return (
     <Container>
-      <Counter title="This is a Counter App `TEST`" initValue={5} />
+      <Counter title="This is a Class Counter App" initValue={5} />
     </Container>
   );
 };
